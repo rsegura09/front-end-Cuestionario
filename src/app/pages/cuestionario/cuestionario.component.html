@@ -1,1 +1,26 @@
-<p>cuestionario works!</p>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="cuestionarioForm" (ngSubmit)="enviar()">
+      <div>
+        <label for="titulo">Titulo: </label>
+        <input type="text" formControlName="titulo" id="titulo">
+      </div>
+      <div>
+        <label for="descripcion">Descripción: </label>
+        <input type="text" formControlName="descripcion" id="descripcion">
+      </div>
+      <div>
+        <label for="fechadeejecucion">Fecha de Ejecución: </label>
+        <input type="date" formControlName="fechaDeEjecucion" id="fechadeejecucion">
+        <input type="time" formControlName="horaDeEjecucion"id="horadeejecucion">
+      </div>
+      <div>
+        <p>¡Complete los datos!</p>
+        <button type="submit" [disabled]="!cuestionarioForm.valid">Enviar</button>
+      </div>
+
+    </form>
+  </div>
+  {{cuestionarioForm.value.horaDeEjecucion}}
+</div>
+
