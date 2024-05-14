@@ -47,7 +47,7 @@ export class CuestionarioComponent implements OnInit {
   }
 
   agregarCuestionario(){
-    
+    console.log(this.cuestionarioForm.value)
   };
 
   eliminarCuestionario(index: Number) {
