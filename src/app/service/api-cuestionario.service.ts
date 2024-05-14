@@ -25,4 +25,8 @@ export class ApiCuestionarioService {
       cuestionario
     );
   }
+
+  deleteCuestionarioById(id: Number | string): Observable <ICuestionario>{
+    return this.http.delete<ICuestionario>(`${this.baseUrl}/cuestionarios/${id}`)
+  }
 }

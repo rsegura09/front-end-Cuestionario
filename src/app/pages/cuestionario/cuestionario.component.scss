@@ -1,18 +1,18 @@
 .card {
-  width: 500px;
-  height: auto;
+  max-width: 800px;
   display: flex;
   margin: 20px auto;
-  .card-body {
+  justify-content: space-between;
+  .left-body {
     width: 300px;
     display: flex;
     flex-direction: column;
-    margin: 20px auto;
+    margin: 1rem;
     form {
       div {
         display: flex;
         flex-direction: column;
-        margin: 1rem;
+        //margin: 1rem;
         width: 100%;
         button {
         padding: 5px;
@@ -32,4 +32,29 @@
 
     }
   }
+
+  .right-body{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    max-width: 400px;
+    ul{
+      li{
+        button {
+      padding: 5px;
+          margin: 0 5px;
+          color: #fff;
+          font-weight: 600;
+          background-color: rgb(0, 0, 0);
+          border: none;
+          border-radius: 5px;
+          transition: transform 0.2s;
+          &:hover {
+           cursor: pointer;
+          transform: scale(1.1);
+          }
+      }
+    }
+  }
+}
 }

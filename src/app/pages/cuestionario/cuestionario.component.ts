@@ -2,16 +2,16 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ApiCuestionarioService } from '../../service/api-cuestionario.service';
 import { ICuestionario } from '../../models/cuestionario.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cuestionario',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './cuestionario.component.html',
   styleUrl: './cuestionario.component.scss',
 })
 export class CuestionarioComponent implements OnInit {
-
   cuestionarioLista: ICuestionario[] = [];
 
   cuestionarioForm = this.formBuilder.group({
@@ -34,6 +34,7 @@ export class CuestionarioComponent implements OnInit {
     this._apiCuestionario.getAllCuestionario().subscribe({
       next: (result) => {
         this.cuestionarioLista = result;
+        console.log(this.cuestionarioLista);
       },
       error: (err) => {
         console.log(err);
@@ -45,7 +46,19 @@ export class CuestionarioComponent implements OnInit {
     console.warn(this.cuestionarioForm.value.titulo);
   }
 
-  listarCuestionarios() {
-    console.log(this.cuestionarioLista);
+  agregarCuestionario(){
+    
+  };
+
+  eliminarCuestionario(index: Number) {
+    this._apiCuestionario.deleteCuestionarioById(index).subscribe({
+      next: (result) => {
+        this.getCuestionarios();
+        console.log(this.cuestionarioLista);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

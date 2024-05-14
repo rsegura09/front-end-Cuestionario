@@ -1,6 +1,6 @@
 <div class="card">
-  <div class="card-body">
-    <form [formGroup]="cuestionarioForm" (ngSubmit)="enviar()">
+  <div class="left-body">
+    <form [formGroup]="cuestionarioForm" (ngSubmit)="agregarCuestionario()">
       <div>
         <label for="titulo">Titulo: </label>
         <input type="text" formControlName="titulo" id="titulo">
@@ -12,16 +12,28 @@
       <div>
         <label for="fechadeejecucion">Fecha de Ejecución: </label>
         <input type="date" formControlName="fechaDeEjecucion" id="fechadeejecucion">
-        <input type="time" formControlName="horaDeEjecucion"id="horadeejecucion">
+        <input type="time" formControlName="horaDeEjecucion" id="horadeejecucion">
       </div>
       <div>
         <p>¡Complete los datos!</p>
-        <button type="submit" [disabled]="!cuestionarioForm.valid">Enviar</button>
-        <button type="button" (click)="listarCuestionarios()" >Listar Cuestionarios</button>
+        <button type="submit" [disabled]="!cuestionarioForm.valid">Agregar</button>
       </div>
-
     </form>
   </div>
-  {{cuestionarioForm.value.horaDeEjecucion}}
+  <div class="right-body">
+    <h2>Lista de Cuestionarios</h2>
+    <ul>
+      @for (cuestionario of cuestionarioLista; track cuestionario.idCuestionario; let idCuestionario = $index) {
+      <li>
+        <p>ID: {{ cuestionario.idCuestionario}}</p>
+        <p>Titulo: {{ cuestionario.titulo }}</p>
+        <p>Descripcion: {{cuestionario.descripcion}}</p>
+        <p>Fecha de Creación: {{ cuestionario.fechaDeCreacion | date:"EEEE, dd MMM yyyy, hh:mm a"}}</p>
+        <p>Fecha de Ejecución: {{cuestionario.fechaDeEjecucion | date:"EEEE, dd MMM yyyy, hh:mm a" }}</p>
+        <button (click)="eliminarCuestionario(cuestionario.idCuestionario)">Eliminar</button>
+        <button>Gestionar</button>
+      </li>
+      }
+    </ul>
+  </div>
 </div>
-
