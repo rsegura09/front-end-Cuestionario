@@ -40,8 +40,9 @@
     max-width: 400px;
     ul{
       li{
+
         button {
-      padding: 5px;
+          padding: 5px;
           margin: 0 5px;
           color: #fff;
           font-weight: 600;
@@ -52,6 +53,7 @@
           &:hover {
            cursor: pointer;
           transform: scale(1.1);
+
           }
       }
     }

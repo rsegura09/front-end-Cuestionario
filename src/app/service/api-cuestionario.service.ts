@@ -20,10 +20,12 @@ export class ApiCuestionarioService {
   }
 
   postCuestionario(cuestionario: ICuestionario): Observable<ICuestionario> {
+    console.log(cuestionario);
     return this.http.post<ICuestionario>(
       `${this.baseUrl}/cuestionarios`,
       cuestionario
     );
+
   }
 
   deleteCuestionarioById(id: Number | string): Observable <ICuestionario>{

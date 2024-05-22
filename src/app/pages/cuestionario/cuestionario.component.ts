@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ApiCuestionarioService } from '../../service/api-cuestionario.service';
 import { ICuestionario } from '../../models/cuestionario.model';
@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './cuestionario.component.scss',
 })
 export class CuestionarioComponent implements OnInit {
+  ID_PERSONA: number = 1;
   cuestionarioLista: ICuestionario[] = [];
 
   cuestionarioForm = this.formBuilder.group({
@@ -42,15 +43,33 @@ export class CuestionarioComponent implements OnInit {
     });
   }
 
-  enviar() {
-    console.warn(this.cuestionarioForm.value.titulo);
+  enviarCuestionario(): void{
+    const fecha = this.cuestionarioForm.value.fechaDeEjecucion+"T"+this.cuestionarioForm.value.horaDeEjecucion;
+    const datos : ICuestionario ={
+      idCuestionario: 0,
+      idPersona: this.ID_PERSONA,
+      titulo: this.cuestionarioForm.value.titulo,
+      descripcion: this.cuestionarioForm.value.descripcion,
+      fechaDeCreacion: new Date(fecha),
+      fechaDeEjecucion: fecha
+    }
+    this.agregarCuestionario(datos)
+    //this.cuestionarioForm.reset()
+
   }
 
-  agregarCuestionario(){
-    console.log(this.cuestionarioForm.value)
-  };
+  agregarCuestionario(cuestionario: ICuestionario) {
+    this._apiCuestionario.postCuestionario(cuestionario).subscribe({
+      next: (result) => {
+        this.getCuestionarios();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
-  eliminarCuestionario(index: Number) {
+  eliminarCuestionario(index: number) {
     this._apiCuestionario.deleteCuestionarioById(index).subscribe({
       next: (result) => {
         this.getCuestionarios();

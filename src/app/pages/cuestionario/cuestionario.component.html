@@ -1,6 +1,6 @@
 <div class="card">
   <div class="left-body">
-    <form [formGroup]="cuestionarioForm" (ngSubmit)="agregarCuestionario()">
+    <form [formGroup]="cuestionarioForm" (ngSubmit)="enviarCuestionario()">
       <div>
         <label for="titulo">Titulo: </label>
         <input type="text" formControlName="titulo" id="titulo">
@@ -33,6 +33,8 @@
         <button (click)="eliminarCuestionario(cuestionario.idCuestionario)">Eliminar</button>
         <button>Gestionar</button>
       </li>
+      } @empty{
+        <h3>¡No hay cuestionarios aún!</h3>
       }
     </ul>
   </div>
